@@ -5,6 +5,7 @@ import com.github.heberleandro.trelleibackend.model.user.Role;
 import com.github.heberleandro.trelleibackend.model.user.User;
 import com.github.heberleandro.trelleibackend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +21,10 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        repository.findByEmail(request.getEmail()).ifPresent(user -> {
+            throw new DuplicateKeyException("This email is already being used");
+        });
+
         var user = User.builder()
                 .firstName(request.getFirstname())
                 .lastName(request.getLastname())
