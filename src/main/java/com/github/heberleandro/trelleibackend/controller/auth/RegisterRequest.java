@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegisterRequest {
 
-    @NotBlank(message = "First name is mandatory")
+    @NotBlank(message = "First Name is mandatory")
     private String firstname;
-    @NotBlank(message = "Last name is mandatory")
+    @NotBlank(message = "Last Name is mandatory")
     private String lastname;
     @NotBlank(message = "Email is mandatory")
     @Email(message = "Enter a valid email")

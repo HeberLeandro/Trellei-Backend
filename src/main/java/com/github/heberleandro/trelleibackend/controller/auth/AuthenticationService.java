@@ -22,7 +22,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
         repository.findByEmail(request.getEmail()).ifPresent(user -> {
-            throw new DuplicateKeyException("This email is already being used");
+            throw new DuplicateKeyException("This Email is already being used");
         });
 
         var user = User.builder()
