@@ -1,5 +1,6 @@
 package com.github.heberleandro.trelleibackend.config;
 
+import com.github.heberleandro.trelleibackend.controller.exception.GlobalExceptionHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,9 +34,9 @@ public class SecurityConfiguration {
                 .cors().configurationSource(corsConfigurationSource()).and().csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .sessionManagement()
+                .anyRequest().authenticated().and()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint()) //TODO 
+                .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authenticationProvider)
@@ -53,5 +54,10 @@ public class SecurityConfiguration {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+
+    @Bean
+    public GlobalExceptionHandler authenticationEntryPoint(){
+        return new GlobalExceptionHandler();
     }
 }
