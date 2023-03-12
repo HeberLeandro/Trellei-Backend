@@ -20,7 +20,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request) {
+    public AuthenticationToken register(RegisterRequest request) {
         repository.findByEmail(request.getEmail()).ifPresent(user -> {
             throw new DuplicateKeyException("This Email is already being used");
         });
@@ -37,7 +37,7 @@ public class AuthenticationService {
         return getAuthenticationResponse(user);
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationToken authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -50,10 +50,10 @@ public class AuthenticationService {
         return getAuthenticationResponse(user);
     }
 
-    private AuthenticationResponse getAuthenticationResponse(User user) {
+    private AuthenticationToken getAuthenticationResponse(User user) {
         var jwtToken = jwtService.generateToken(user);
 
-        return AuthenticationResponse.builder()
+        return AuthenticationToken.builder()
                 .token(jwtToken)
                 .build();
     }

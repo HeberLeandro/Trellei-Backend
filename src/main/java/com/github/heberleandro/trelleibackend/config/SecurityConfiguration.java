@@ -34,9 +34,9 @@ public class SecurityConfiguration {
                 .cors().configurationSource(corsConfigurationSource()).and().csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**").permitAll()
-                .anyRequest().authenticated().and()
-                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint()) //TODO 
-                .and().sessionManagement()
+                .anyRequest().authenticated()
+                .and()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authenticationProvider)
@@ -56,8 +56,4 @@ public class SecurityConfiguration {
         return source;
     }
 
-    @Bean
-    public GlobalExceptionHandler authenticationEntryPoint(){
-        return new GlobalExceptionHandler();
-    }
 }

@@ -1,5 +1,6 @@
 package com.github.heberleandro.trelleibackend.config;
 
+import com.github.heberleandro.trelleibackend.controller.exception.GlobalExceptionHandler;
 import com.github.heberleandro.trelleibackend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
