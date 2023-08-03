@@ -2,6 +2,7 @@ package com.github.heberleandro.trelleibackend.controller.user;
 
 import com.github.heberleandro.trelleibackend.config.JwtService;
 import com.github.heberleandro.trelleibackend.controller.auth.AuthenticationToken;
+import com.github.heberleandro.trelleibackend.model.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,12 +18,12 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> getUsers() {
+    public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok(userService.getUsers());
     }
 
-    @GetMapping("{token}")
-    public ResponseEntity<UserDTO> getUserByToken(@PathVariable("token") String token) {
-        return ResponseEntity.ok(userService.getUserByToken(token));
+    @GetMapping("/{Id}")
+    public ResponseEntity<User> getUserByToken(@PathVariable("Id") Integer Id) {
+        return ResponseEntity.ok(userService.getUserById(Id));
     }
 }

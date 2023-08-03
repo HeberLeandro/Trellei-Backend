@@ -1,5 +1,6 @@
 package com.github.heberleandro.trelleibackend.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -24,16 +25,23 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue
     private Integer Id;
+
     @Column(nullable = false)
     @Size(min = 3, max = 30, message = "Invalid First Name: Must be of 3 - 30 characters")
     private String firstName;
+
     @Column(nullable = false)
     @Size(min = 3, max = 30, message = "Invalid Last Name: Must be of 3 - 30 characters")
     private String lastName;
+
     @Column(unique = true, nullable = false)
     private String email;
+
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
+
+    @JsonIgnore
     @Enumerated(EnumType.STRING)
     Role role;
 
