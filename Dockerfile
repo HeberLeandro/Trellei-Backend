@@ -12,4 +12,4 @@ EXPOSE 8080
 
 COPY --from=build /app/target/trellei-backend-0.0.1-SNAPSHOT.jar /app/trellei-backend-0.0.1-SNAPSHOT.jar
 
-ENTRYPOINT ["java", "-jar", "/app/demo-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app/trellei-backend-0.0.1-SNAPSHOT.jar"]
