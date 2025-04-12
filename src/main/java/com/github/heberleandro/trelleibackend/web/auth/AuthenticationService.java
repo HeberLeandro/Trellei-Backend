@@ -1,9 +1,12 @@
-package com.github.heberleandro.trelleibackend.controller.auth;
+package com.github.heberleandro.trelleibackend.web.auth;
 
 import com.github.heberleandro.trelleibackend.config.JwtService;
-import com.github.heberleandro.trelleibackend.model.user.Role;
-import com.github.heberleandro.trelleibackend.model.user.User;
-import com.github.heberleandro.trelleibackend.repository.UserRepository;
+import com.github.heberleandro.trelleibackend.web.auth.request.AuthenticationRequest;
+import com.github.heberleandro.trelleibackend.web.auth.request.RegisterRequest;
+import com.github.heberleandro.trelleibackend.web.auth.response.AuthenticationToken;
+import com.github.heberleandro.trelleibackend.domain.user.entity.Role;
+import com.github.heberleandro.trelleibackend.domain.user.entity.User;
+import com.github.heberleandro.trelleibackend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.authentication.AuthenticationManager;

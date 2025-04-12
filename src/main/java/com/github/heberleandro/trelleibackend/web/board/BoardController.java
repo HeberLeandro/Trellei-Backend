@@ -1,9 +1,8 @@
-package com.github.heberleandro.trelleibackend.controller.board;
+package com.github.heberleandro.trelleibackend.web.board;
 
-import com.github.heberleandro.trelleibackend.controller.user.UserService;
-import com.github.heberleandro.trelleibackend.model.board.Board;
-import com.github.heberleandro.trelleibackend.model.user.User;
-import com.github.heberleandro.trelleibackend.repository.BoardRepository;
+import com.github.heberleandro.trelleibackend.domain.user.service.UserService;
+import com.github.heberleandro.trelleibackend.domain.board.entity.Board;
+import com.github.heberleandro.trelleibackend.domain.user.entity.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

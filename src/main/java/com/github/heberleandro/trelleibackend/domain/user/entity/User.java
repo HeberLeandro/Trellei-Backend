@@ -1,6 +1,7 @@
-package com.github.heberleandro.trelleibackend.model.user;
+package com.github.heberleandro.trelleibackend.domain.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.heberleandro.trelleibackend.domain.board.entity.Board;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue
-    private Integer Id;
+    private Integer id;
 
     @Column(nullable = false)
     @Size(min = 3, max = 30, message = "Invalid First Name: Must be of 3 - 30 characters")

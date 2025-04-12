@@ -1,7 +1,7 @@
-package com.github.heberleandro.trelleibackend.model.board;
+package com.github.heberleandro.trelleibackend.domain.board.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.heberleandro.trelleibackend.model.user.User;
+import com.github.heberleandro.trelleibackend.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +20,7 @@ public class Board {
 
     @Id
     @GeneratedValue
-    private Integer Id;
+    private Integer id;
 
     @Column(nullable = false)
     private String name;

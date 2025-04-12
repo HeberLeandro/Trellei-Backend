@@ -1,8 +1,8 @@
-package com.github.heberleandro.trelleibackend.controller.user;
+package com.github.heberleandro.trelleibackend.domain.user.service;
 
 import com.github.heberleandro.trelleibackend.config.JwtService;
-import com.github.heberleandro.trelleibackend.model.user.User;
-import com.github.heberleandro.trelleibackend.repository.UserRepository;
+import com.github.heberleandro.trelleibackend.domain.user.entity.User;
+import com.github.heberleandro.trelleibackend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

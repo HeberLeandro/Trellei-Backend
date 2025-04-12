@@ -1,11 +1,9 @@
-package com.github.heberleandro.trelleibackend.controller.user;
+package com.github.heberleandro.trelleibackend.web.user;
 
-import com.github.heberleandro.trelleibackend.config.JwtService;
-import com.github.heberleandro.trelleibackend.controller.auth.AuthenticationToken;
-import com.github.heberleandro.trelleibackend.model.user.User;
+import com.github.heberleandro.trelleibackend.domain.user.service.UserService;
+import com.github.heberleandro.trelleibackend.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

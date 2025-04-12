@@ -1,9 +1,6 @@
-package com.github.heberleandro.trelleibackend.repository;
+package com.github.heberleandro.trelleibackend.domain.board.repository;
 
-import com.github.heberleandro.trelleibackend.model.board.Board;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.github.heberleandro.trelleibackend.domain.board.entity.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

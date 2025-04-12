@@ -1,5 +1,8 @@
-package com.github.heberleandro.trelleibackend.controller.auth;
+package com.github.heberleandro.trelleibackend.web.auth;
 
+import com.github.heberleandro.trelleibackend.web.auth.request.AuthenticationRequest;
+import com.github.heberleandro.trelleibackend.web.auth.request.RegisterRequest;
+import com.github.heberleandro.trelleibackend.web.auth.response.AuthenticationToken;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

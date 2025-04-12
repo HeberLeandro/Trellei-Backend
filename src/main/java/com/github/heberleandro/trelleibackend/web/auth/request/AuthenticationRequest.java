@@ -1,4 +1,4 @@
-package com.github.heberleandro.trelleibackend.controller.auth;
+package com.github.heberleandro.trelleibackend.web.auth.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

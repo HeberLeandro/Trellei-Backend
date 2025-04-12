@@ -1,4 +1,4 @@
-package com.github.heberleandro.trelleibackend.model.board;
+package com.github.heberleandro.trelleibackend.domain.card.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

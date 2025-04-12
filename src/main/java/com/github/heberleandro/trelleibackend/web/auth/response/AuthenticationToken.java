@@ -1,4 +1,4 @@
-package com.github.heberleandro.trelleibackend.controller.auth;
+package com.github.heberleandro.trelleibackend.web.auth.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
