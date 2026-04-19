@@ -126,7 +126,7 @@
 
 		<!-- PROFILE PRD: usa PostgreSQL -->
 		<profile>
-			<id>prod</id>
+			<id>prd</id>
 			<dependencies>
 				<dependency>
 					<groupId>org.postgresql</groupId>
