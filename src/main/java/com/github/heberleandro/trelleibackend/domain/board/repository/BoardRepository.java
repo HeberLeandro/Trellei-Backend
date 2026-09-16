@@ -12,5 +12,5 @@ public interface BoardRepository {
 
     List<Board> findAll(BoardFilter boardFilter);
 
-    void save(Board board);
+    Board save(Board board);
 }

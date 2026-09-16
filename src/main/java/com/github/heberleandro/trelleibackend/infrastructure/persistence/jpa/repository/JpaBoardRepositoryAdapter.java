@@ -36,8 +36,9 @@ public class JpaBoardRepositoryAdapter implements BoardRepository {
     }
 
     @Override
-    public void save(Board board) {
+    public Board save(Board board) {
         BoardJpaEntity boardJpaEntity = mapper.toJpa(board);
-        repository.save(boardJpaEntity);
+        BoardJpaEntity boardSaved = repository.save(boardJpaEntity);
+        return mapper.toDomain(boardSaved);
     }
 }

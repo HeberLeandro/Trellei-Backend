@@ -1,6 +1,7 @@
 package com.github.heberleandro.trelleibackend.interfaces.web.board;
 
 import com.github.heberleandro.trelleibackend.application.board.create.CreateBoardCommand;
+import com.github.heberleandro.trelleibackend.application.board.create.CreateBoardResult;
 import com.github.heberleandro.trelleibackend.application.board.create.CreateBoardUseCase;
 import com.github.heberleandro.trelleibackend.application.board.read.GetMyBoardsQuery;
 import com.github.heberleandro.trelleibackend.application.board.read.GetMyBoardsUseCase;
@@ -40,8 +41,12 @@ public class BoardController {
 
         User user = getUser(authentication);
         CreateBoardCommand createBoardCommand = new CreateBoardCommand(board.name(), board.color(), user);
+        CreateBoardResult boardResult = createBoardUseCase.execute(createBoardCommand);
+        BoardResponse boardResponse = new BoardResponse(boardResult.boardId(),
+                boardResult.name(),
+                boardResult.color());
 
-        return ResponseEntity.ok(createBoardUseCase.execute(createBoardCommand));
+        return ResponseEntity.ok(boardResponse);
     }
 
     private Integer getUserId(Authentication authentication) {
