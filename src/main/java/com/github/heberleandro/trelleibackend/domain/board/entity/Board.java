@@ -27,43 +27,37 @@ public class Board {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Board name cannot be empty");
         }
-
         this.name = name;
     }
 
     private void validate(String name, String color, User owner) {
-        // TODO
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Board name cannot be empty");
+        }
+
+        if (color == null || color.isBlank()) {
+            throw new IllegalArgumentException("Board color cannot be empty");
+        }
+
+        if (owner == null) {
+            throw new IllegalArgumentException("Board owner cannot be null");
+        }
     }
 
     public Integer getBoardId() {
         return boardId;
     }
 
-    public void setBoardId(Integer boardId) {
-        this.boardId = boardId;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public User getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
 }

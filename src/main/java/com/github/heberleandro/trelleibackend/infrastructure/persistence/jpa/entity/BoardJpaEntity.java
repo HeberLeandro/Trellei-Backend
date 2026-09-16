@@ -3,10 +3,6 @@ package com.github.heberleandro.trelleibackend.infrastructure.persistence.jpa.en
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.heberleandro.trelleibackend.domain.user.entity.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
