@@ -1,4 +1,4 @@
-package com.github.heberleandro.trelleibackend.web.exception;
+package com.github.heberleandro.trelleibackend.interfaces.web.exception;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;

@@ -1,7 +1,6 @@
-package com.github.heberleandro.trelleibackend.web.auth.request;
+package com.github.heberleandro.trelleibackend.interfaces.web.auth;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,8 +10,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class RegisterRequest {
 
+    @NotBlank(message = "First Name is mandatory.")
+    private String firstname;
+    @NotBlank(message = "Last Name is mandatory.")
+    private String lastname;
     @NotBlank(message = "Email is mandatory.")
     @Email(message = "Enter a valid email.")
     private String email;

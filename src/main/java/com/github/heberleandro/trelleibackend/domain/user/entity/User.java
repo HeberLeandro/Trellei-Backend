@@ -1,7 +1,6 @@
 package com.github.heberleandro.trelleibackend.domain.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.heberleandro.trelleibackend.domain.board.entity.Board;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
