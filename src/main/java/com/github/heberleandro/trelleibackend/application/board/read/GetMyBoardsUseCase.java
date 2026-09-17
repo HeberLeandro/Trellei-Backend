@@ -3,7 +3,6 @@ package com.github.heberleandro.trelleibackend.application.board.read;
 import com.github.heberleandro.trelleibackend.domain.board.entity.Board;
 import com.github.heberleandro.trelleibackend.domain.board.filter.BoardFilter;
 import com.github.heberleandro.trelleibackend.domain.board.repository.BoardRepository;
-import com.github.heberleandro.trelleibackend.interfaces.web.board.BoardResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,20 +16,24 @@ public class GetMyBoardsUseCase {
         this.boardRepository = boardRepository;
     }
 
-    public List<BoardResponse> execute(GetMyBoardsQuery query) {
+    public List<GetBoardsResponse> execute(GetMyBoardsQuery query) {
 
         BoardFilter filter = new BoardFilter(
                 query.userId(),
                 query.name(),
-                query.color()
-        );
+                query.color());
 
         return boardRepository.findAll(filter)
                 .stream()
-                .map(board -> new BoardResponse(
-                    board.getBoardId(),
-                    board.getName(),
-                    board.getColor()
-                )).toList();
+                .map(this::toGetBoardsResponse)
+                .toList();
+    }
+
+    private GetBoardsResponse toGetBoardsResponse(Board board) {
+        return new GetBoardsResponse(
+                board.getBoardId(),
+                board.getName(),
+                board.getColor(),
+                board.getOwner().getId());
     }
 }

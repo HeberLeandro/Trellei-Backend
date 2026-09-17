@@ -3,6 +3,7 @@ package com.github.heberleandro.trelleibackend.interfaces.web.board;
 import com.github.heberleandro.trelleibackend.application.board.create.CreateBoardCommand;
 import com.github.heberleandro.trelleibackend.application.board.create.CreateBoardResult;
 import com.github.heberleandro.trelleibackend.application.board.create.CreateBoardUseCase;
+import com.github.heberleandro.trelleibackend.application.board.read.GetBoardsResponse;
 import com.github.heberleandro.trelleibackend.application.board.read.GetMyBoardsQuery;
 import com.github.heberleandro.trelleibackend.application.board.read.GetMyBoardsUseCase;
 import com.github.heberleandro.trelleibackend.domain.user.entity.User;
@@ -27,17 +28,24 @@ public class BoardController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<BoardResponse>> getAllBoardsByOwnerId(
             @ModelAttribute BoardRequestFilter filter,
-            Authentication authentication){
+            Authentication authentication) {
 
         Integer userId = getUserId(authentication);
         GetMyBoardsQuery getMyBoardsQuery = new GetMyBoardsQuery(userId, filter.name(), filter.color());
-        return ResponseEntity.ok(getMyBoardsUseCase.execute(getMyBoardsQuery));
+
+        List<BoardResponse> boards = getMyBoardsUseCase.execute(getMyBoardsQuery)
+                .stream()
+                .map(this::toBoardResponse)
+                .toList();
+
+        return ResponseEntity.ok(boards);
     }
+
 
     @PostMapping
     public ResponseEntity<BoardResponse> saveBoard(
             @RequestBody CreateBoardRequest board,
-            Authentication authentication){
+            Authentication authentication) {
 
         User user = getUser(authentication);
         CreateBoardCommand createBoardCommand = new CreateBoardCommand(board.name(), board.color(), user);
@@ -50,10 +58,17 @@ public class BoardController {
     }
 
     private Integer getUserId(Authentication authentication) {
-       return ((User) authentication.getPrincipal()).getId();
+        return ((User) authentication.getPrincipal()).getId();
     }
 
     private User getUser(Authentication authentication) {
         return ((User) authentication.getPrincipal());
+    }
+
+    private BoardResponse toBoardResponse(GetBoardsResponse board) {
+        return new BoardResponse(
+                board.boardId(),
+                board.name(),
+                board.color());
     }
 }
