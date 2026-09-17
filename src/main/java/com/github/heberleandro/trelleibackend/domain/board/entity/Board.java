@@ -1,37 +1,63 @@
 package com.github.heberleandro.trelleibackend.domain.board.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.heberleandro.trelleibackend.domain.user.entity.User;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Entity
-@Table(name = "board")
 public class Board {
 
-    @Id
-    @GeneratedValue
-    private Integer id;
+    private Integer boardId;
 
-    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
     private String color;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "ownerId", nullable = false)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @JsonIgnore
     private User owner;
+
+    public Board() {}
+
+    public Board(Integer boardId, String name, String color, User owner) {
+        validate(name, color, owner);
+        this.boardId = boardId;
+        this.name = name;
+        this.color = color;
+        this.owner = owner;
+    }
+
+
+    public void rename(String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Board name cannot be empty");
+        }
+        this.name = name;
+    }
+
+    private void validate(String name, String color, User owner) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Board name cannot be empty");
+        }
+
+        if (color == null || color.isBlank()) {
+            throw new IllegalArgumentException("Board color cannot be empty");
+        }
+
+        if (owner == null) {
+            throw new IllegalArgumentException("Board owner cannot be null");
+        }
+    }
+
+    public Integer getBoardId() {
+        return boardId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
 
 }

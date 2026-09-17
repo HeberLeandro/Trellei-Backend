@@ -1,8 +1,6 @@
-package com.github.heberleandro.trelleibackend.web.auth;
+package com.github.heberleandro.trelleibackend.interfaces.web.auth;
 
-import com.github.heberleandro.trelleibackend.web.auth.request.AuthenticationRequest;
-import com.github.heberleandro.trelleibackend.web.auth.request.RegisterRequest;
-import com.github.heberleandro.trelleibackend.web.auth.response.AuthenticationToken;
+import com.github.heberleandro.trelleibackend.domain.auth.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,12 +18,12 @@ public class AuthenticationController {
     private final AuthenticationService service;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationToken> register(@RequestBody @Valid RegisterRequest request) {
+    public ResponseEntity<LoginResponse> register(@RequestBody @Valid RegisterRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.register(request));
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationToken> authenticate(@RequestBody @Valid AuthenticationRequest request) {
+    public ResponseEntity<LoginResponse> authenticate(@RequestBody @Valid LoginRequest request) {
         return ResponseEntity.ok(service.authenticate(request));
     }
 }

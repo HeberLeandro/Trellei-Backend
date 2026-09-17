@@ -1,4 +1,4 @@
-package com.github.heberleandro.trelleibackend.web.auth.response;
+package com.github.heberleandro.trelleibackend.interfaces.web.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationToken {
+public class LoginResponse {
 
     private String token;
     private Integer userId;

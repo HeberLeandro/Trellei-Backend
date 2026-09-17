@@ -1,4 +1,4 @@
-package com.github.heberleandro.trelleibackend.web.user;
+package com.github.heberleandro.trelleibackend.interfaces.web.user;
 
 import com.github.heberleandro.trelleibackend.domain.user.service.UserService;
 import com.github.heberleandro.trelleibackend.domain.user.entity.User;
@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/{Id}")
-    public ResponseEntity<User> getUserByToken(@PathVariable("Id") Integer Id) {
+    public ResponseEntity<User> getUserByToken(@PathVariable Integer Id) {
         return ResponseEntity.ok(userService.getUserById(Id));
     }
 }

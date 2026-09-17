@@ -1,9 +1,9 @@
-package com.github.heberleandro.trelleibackend.web.auth;
+package com.github.heberleandro.trelleibackend.domain.auth;
 
 import com.github.heberleandro.trelleibackend.config.JwtService;
-import com.github.heberleandro.trelleibackend.web.auth.request.AuthenticationRequest;
-import com.github.heberleandro.trelleibackend.web.auth.request.RegisterRequest;
-import com.github.heberleandro.trelleibackend.web.auth.response.AuthenticationToken;
+import com.github.heberleandro.trelleibackend.interfaces.web.auth.LoginRequest;
+import com.github.heberleandro.trelleibackend.interfaces.web.auth.RegisterRequest;
+import com.github.heberleandro.trelleibackend.interfaces.web.auth.LoginResponse;
 import com.github.heberleandro.trelleibackend.domain.user.entity.Role;
 import com.github.heberleandro.trelleibackend.domain.user.entity.User;
 import com.github.heberleandro.trelleibackend.domain.user.repository.UserRepository;
@@ -23,7 +23,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationToken register(RegisterRequest request) {
+    public LoginResponse register(RegisterRequest request) {
         repository.findByEmail(request.getEmail()).ifPresent(user -> {
             throw new DuplicateKeyException("This Email is already being used");
         });
@@ -40,7 +40,7 @@ public class AuthenticationService {
         return getAuthenticationResponse(user);
     }
 
-    public AuthenticationToken authenticate(AuthenticationRequest request) {
+    public LoginResponse authenticate(LoginRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -53,10 +53,10 @@ public class AuthenticationService {
         return getAuthenticationResponse(user);
     }
 
-    private AuthenticationToken getAuthenticationResponse(User user) {
+    private LoginResponse getAuthenticationResponse(User user) {
         var jwtToken = jwtService.generateToken(user);
 
-        return AuthenticationToken.builder()
+        return LoginResponse.builder()
                 .token(jwtToken)
                 .userId(user.getId())
                 .build();
