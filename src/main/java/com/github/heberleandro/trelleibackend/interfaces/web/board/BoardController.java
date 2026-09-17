@@ -6,8 +6,6 @@ import com.github.heberleandro.trelleibackend.application.board.create.CreateBoa
 import com.github.heberleandro.trelleibackend.application.board.read.GetMyBoardsQuery;
 import com.github.heberleandro.trelleibackend.application.board.read.GetMyBoardsUseCase;
 import com.github.heberleandro.trelleibackend.domain.user.entity.User;
-import com.github.heberleandro.trelleibackend.domain.user.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -15,22 +13,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/v1/boards")
 public class BoardController {
 
     final CreateBoardUseCase createBoardUseCase;
     final GetMyBoardsUseCase getMyBoardsUseCase;
 
-    final UserService userService;
+    public BoardController(CreateBoardUseCase createBoardUseCase, GetMyBoardsUseCase getMyBoardsUseCase) {
+        this.createBoardUseCase = createBoardUseCase;
+        this.getMyBoardsUseCase = getMyBoardsUseCase;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<BoardResponse>> getAllBoardsByOwnerId(
+            @ModelAttribute BoardRequestFilter filter,
             Authentication authentication){
 
         Integer userId = getUserId(authentication);
-        GetMyBoardsQuery getMyBoardsQuery = new GetMyBoardsQuery(userId, null, null);
-
+        GetMyBoardsQuery getMyBoardsQuery = new GetMyBoardsQuery(userId, filter.name(), filter.color());
         return ResponseEntity.ok(getMyBoardsUseCase.execute(getMyBoardsQuery));
     }
 

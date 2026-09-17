@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @Repository
 public class JpaBoardRepositoryAdapter implements BoardRepository {
@@ -23,22 +24,28 @@ public class JpaBoardRepositoryAdapter implements BoardRepository {
 
     @Override
     public Optional<Board> findById(Integer integer) {
-
         return repository.findById(integer).map(mapper::toDomain);
     }
 
     @Override
     public List<Board> findAll(BoardFilter boardFilter) {
+        Predicate<BoardJpaEntity> colorPredicate = boardJpaEntity -> boardFilter.color() == null
+                || boardJpaEntity.getColor().equals(boardFilter.color());
+
+        Predicate<BoardJpaEntity> boardPredicate = boardJpaEntity -> boardFilter.name() == null
+                        || boardJpaEntity.getName().contains(boardFilter.name());
+
         return repository.findAllByOwnerId(boardFilter.ownerId())
                 .stream()
+                .filter(boardPredicate)
+                .filter(colorPredicate)
                 .map(mapper::toDomain)
                 .toList();
     }
 
     @Override
     public Board save(Board board) {
-        BoardJpaEntity boardJpaEntity = mapper.toJpa(board);
-        BoardJpaEntity boardSaved = repository.save(boardJpaEntity);
+        BoardJpaEntity boardSaved = repository.save(mapper.toJpa(board));
         return mapper.toDomain(boardSaved);
     }
 }

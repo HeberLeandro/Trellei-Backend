@@ -14,7 +14,7 @@ public class CreateBoardUseCase {
     }
 
     public CreateBoardResult execute(CreateBoardCommand command) {
-        Board board = new Board(0, command.name(), command.color(), command.owner());
+        Board board = new Board(null, command.name(), command.color(), command.owner());
         board = boardRepository.save(board);
 
         return new CreateBoardResult(board.getBoardId(), board.getName(), board.getColor(), board.getOwner());
